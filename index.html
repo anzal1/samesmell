@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
+    />
+    <title>Same Smell</title>
+    <meta
+      name="description"
+      content="One pheromone, two brains, opposite behaviour. A Drosophila dimorphic-circuit visualisation."
+    />
+    <link rel="stylesheet" href="src/ui.css" />
+  </head>
+  <body>
+    <canvas id="stage"></canvas>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <div class="chrome">
+      <div class="divider" aria-hidden="true"></div>
+
+      <div class="sexlabel sexlabel--male">
+        <span class="dot dot--male"></span><span class="sexlabel__text">Male</span>
+        <span class="srcbadge" id="badge-male" hidden></span>
+      </div>
+      <div class="sexlabel sexlabel--female">
+        <span class="dot dot--female"></span><span class="sexlabel__text">Female</span>
+        <span class="srcbadge" id="badge-female" hidden></span>
+      </div>
+
+      <div class="caption" id="caption" role="status" aria-live="polite"></div>
+
+      <div class="modebar" id="modebar" role="tablist" aria-label="Mode">
+        <button class="modebar__btn is-on" type="button" data-mode="lab" role="tab">Lab</button>
+        <button class="modebar__btn" type="button" data-mode="versus" role="tab">Versus</button>
+        <button class="modebar__btn" type="button" data-mode="swipe" role="tab">Swipe</button>
+        <span class="modebar__thumb" id="modebar-thumb" aria-hidden="true"></span>
+      </div>
+
+      <div class="verdict verdict--male" id="verdict-male"></div>
+      <div class="verdict verdict--female" id="verdict-female"></div>
+
+      <div class="stagelayer stagelayer--versus" id="versus-layer" hidden>
+        <div class="vscore" id="versus-score">
+          <span class="vscore__side vscore__side--male">Male</span>
+          <span class="vscore__num" id="versus-num">0 : 0</span>
+          <span class="vscore__side vscore__side--female">Female</span>
+        </div>
+        <canvas class="court" id="court"></canvas>
+        <button class="ghostbtn" id="versus-human" type="button" hidden>
+          You vs the winner
+        </button>
+      </div>
+
+      <div class="stagelayer stagelayer--swipe" id="swipe-layer" hidden>
+        <div class="deck" id="deck"></div>
+        <div class="swipescore" id="swipe-score"></div>
+      </div>
+
+      <div class="puffzone">
+        <button
+          class="puff"
+          id="puff"
+          type="button"
+          aria-label="Hold to puff cVA pheromone"
+        >
+          <svg class="puff__ring" viewBox="0 0 72 72" aria-hidden="true">
+            <circle class="puff__track" cx="36" cy="36" r="33" />
+            <circle class="puff__fill" id="puff-fill" cx="36" cy="36" r="33" />
+          </svg>
+          <span class="puff__core" aria-hidden="true"></span>
+        </button>
+        <div class="puffzone__label">HOLD TO PUFF cVA</div>
+      </div>
+
+      <button class="realtoggle" id="real-toggle" type="button" aria-expanded="false">
+        What's real here
+      </button>
+
+      <section class="realpanel" id="real-panel" aria-hidden="true">
+        <header class="realpanel__head">
+          <h2>What's real here</h2>
+          <button class="realpanel__close" id="real-close" type="button" aria-label="Close">
+            &times;
+          </button>
+        </header>
+        <div class="realpanel__body">
+          <p class="realpanel__kicker">Real</p>
+          <p>
+            cVA is a real pheromone, produced by male <em>Drosophila melanogaster</em>. Both
+            sexes detect it with the same Or67d receptor neurons, so the sensory input
+            really is identical. That signal really does arrive at a sexually dimorphic
+            circuit, and the same molecule really does push males toward aggression and
+            females toward receptivity. The divergence is in the wiring, not the smell.
+          </p>
+          <p class="realpanel__kicker">Staged</p>
+          <p id="real-staged">
+            The morphology on screen is procedurally generated to plausible
+            <em>Drosophila</em> proportions. It is not traced from a connectome. The network
+            is a stand-in graph, the dynamics are a simplified leaky integrate-and-fire, and
+            the timing is stretched so the cascade is legible to a human eye. Spike counts
+            and firing rates here are illustrative, not measured.
+          </p>
+          <p class="realpanel__kicker">This mode</p>
+          <p id="real-mode"></p>
+          <p class="realpanel__kicker">Next</p>
+          <p id="real-next">
+            The production version swaps this morphology for real skeletons from the MaleCNS
+            and FlyWire public releases, keeping the same schema and the same renderer.
+          </p>
+        </div>
+      </section>
+
+      <div class="fps" id="fps" hidden></div>
+      <div class="boot" id="boot">Initialising</div>
+    </div>
+
+    <script src="dist/app.js"></script>
+  </body>
+</html>
